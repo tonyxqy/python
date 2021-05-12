@@ -125,49 +125,60 @@ def erfen_find(x,list,len):
 #     if n==0:
 #         return 1
 #     else: return n*jieChen(n-1)
-#
-#
-# import math # 先导入math模块
-# x=2*math.sqrt(2)/9801
-# k=0
-# answer =0
+
+
+import math # 先导入math模块
+x=2*math.sqrt(2)/9801
+k=0
+answer =0
+try:
+    while (k<10000):
+            y = jieChen(4*k)*(1103+26390*k)
+            z = (394**(4*k))*(jieChen(k)**4)
+            answer = answer+(y/z)
+            k=k+1
+            print('%.15f' %(1.0/(x*answer)))
+except:
+    ''
+import math
+print(math.pi)
+print(math.pi-1.0/(x*answer))
+
+
+import random
+INF=float('inf')
+from pyecharts.charts import Map, Timeline, Bar, Line,Scatter
+from pyecharts import options as opts
+line = Scatter()
+#M=int(input("请输入班级数量"))
+#N=int(input("请输入班级同学数量"))
+columns = [i for i in range(75)]
 # try:
-#     while (k<10000):
-#             y = jieChen(4*k)*(1103+26390*k)
-#             z = (394**(4*k))*(jieChen(k)**4)
-#             answer = answer+(y/z)
-#             k=k+1
-#             print('%.51f' %(1.0/(x*answer)))
-# except:
-#     ''
-#
-#
-#
-# #
-# import random
-# INF=float('inf')
-# try:
-#     #M=int(input("请输入班级数量"))
-#     #N=int(input("请输入班级同学数量"))
-#     M=1000
-#     N=70
-#     while M>=1000:
-#         # while N>=1:
-#             Q = 0
-#             for x in range(0,M):
-#                 bir=[(random.randint(1,365))for i in range(N)]
-#                 sbir=set(bir)
-#                 if(len(sbir)<len(bir)):Q+=1
-#             mydict={}
-#             mydict[N]=Q/M
-#             print(mydict)
-#
-#             # print(Q)
-#             # print(Q/M)
-#             # N+=1
-#     M += 1
-# except:
-#     ''
+classnum=[10,100,1000,10000]
+for M in classnum:
+    data = []
+    for N in range(1,75):
+                Q = 0
+                for x in range(0,M):
+                    bir=[(random.randint(1,365))for i in range(N)]
+                    sbir=set(bir)
+                    if(len(sbir)<len(bir)):Q+=1
+                mydict={}
+                mydict[N]=Q/M
+                # print(mydict)
+                data.append(Q/M)
+                # print(Q)
+                # print(Q/M)
+                # N+=1
+        # M += 1
+    line.add_xaxis(columns)
+    line.add_yaxis("%d个班级"%M,data,label_opts=opts.LabelOpts(is_show=False))
+    # print(data)
+line.render(r"C:\Users\tony5\Desktop\pyclass\master\multi.html")
+print('end')
+
+except:
+    print("error")
 
 from bisect import bisect_left
 from random import randint
@@ -175,7 +186,7 @@ from random import randint
 def make_word_list():
     """Reads lines from a file and builds a list using append."""
     word_list = []
-    fin = open(r'D:\笔记，PDF\Python计算实验一\words.txt','r')
+    fin = open(r'C:\Users\tony5\Desktop\pyclass\master\words.txt','r')
     for line in fin:
         word = line.strip()
         word_list.append(word)
@@ -201,12 +212,13 @@ def delletter(word_list, word,flag):
     delword = word
     if len(delword)==1:
         if delword=='a' or delword =='i':
-            flag[0]=1
+            flag[0]+=1
         return
     else:
       for i in range(0,len(delword)):
         reword=delword[:i]+delword[i+1:]
         if(in_bisect(word_list,reword) or len(reword)==1):
+            print(reword)
             delletter(word_list,reword,flag)
 
 if __name__ == '__main__':
@@ -218,9 +230,10 @@ if __name__ == '__main__':
         if(flag[0]==1):
             lista.append(word)
     lista.sort(reverse=True,key=len)
-    print(lista)
-
-
+    print(lista[0])
+    # flag=[0]
+    # delletter(word_list,'complecting',flag)
+    # print(flag)
 
 
 
